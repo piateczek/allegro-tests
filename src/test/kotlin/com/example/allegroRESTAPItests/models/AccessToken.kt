@@ -1,4 +1,4 @@
-package com.example.allegroRESTAPItests
+package com.example.allegroRESTAPItests.models
 
 import com.google.gson.annotations.SerializedName
 
