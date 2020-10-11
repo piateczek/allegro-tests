@@ -113,4 +113,40 @@ class CategoryAndParametersTests {
         assertEquals(error.errorMessage, "Category '999' not found")
         assertThat(response.code()).isEqualTo(404)
     }
+
+    @Test
+    fun `get categories suggestions` () {
+        val api = Api.create(Constants.API_ALLEGRO_BASE_URL)
+        val response = api.getCategoriesSuggestions(
+                "Muzyka",
+                "Bearer $mainAccessToken",
+                "pl-PL",
+                "application/vnd.allegro.public.v1+json",
+                "application/x-www-form-urlencoded"
+        ).execute()
+
+        assertEquals(response.body()?.matchingCategories?.first()?.matchingCategoryId, "111810")
+        assertEquals(response.body()?.matchingCategories?.first()?.matchingCategoryName, "Muzyka")
+        assertThat(response.code()).isEqualTo(200)
+    }
+
+    @Test
+    fun `not acceptable representation request` () {
+        val api = Api.create(Constants.API_ALLEGRO_BASE_URL)
+        val response = api.getCategoryByID(
+                "1",
+                "Bearer $mainAccessToken",
+                "pl-PL",
+                "TEST",
+                "application/x-www-form-urlencoded"
+        ).execute()
+
+        val jsonError =  response.errorBody()?.string()?.substringAfter("[")?.substringBefore("]")
+        val gson = Gson()
+        val error = gson.fromJson(jsonError, Error::class.java)
+
+        assertEquals(error.errorCode, "NotAcceptableException")
+        assertEquals(error.errorMessage, "Not acceptable representation requested. Please check 'Accept' request header")
+        assertThat(response.code()).isEqualTo(406)
+    }
 }
