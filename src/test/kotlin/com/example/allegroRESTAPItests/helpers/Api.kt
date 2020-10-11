@@ -57,6 +57,15 @@ interface Api {
             @Header("Content-Type") contentType: String
     ): Call<MainErrors>
 
+    @GET("/sale/matching-categories")
+    fun getCategoriesSuggestions(
+            @Query("name") name: String,
+            @Header("Authorization") accessToken: String,
+            @Header("Accept-Language") acceptLanguage: String,
+            @Header("Accept") accept: String,
+            @Header("Content-Type") contentType: String
+    ): Call<MainMatchingCategories>
+
     companion object {
         fun create(baseUrl: String): Api {
             val retrofit = Retrofit.Builder()
