@@ -1,7 +1,9 @@
 # Allegro - REST API Tests
 	
 ## Setup
-Make sure you have Java 8 SDK installed
+* Make sure you have Java 8 SDK installed.  
+* Create your new allegro application - https://apps.developer.allegro.pl/new  
+* Set your Client ID and Client Secret in the ``Constants`` file.
 
 Two ways to run tests:
 ##### Use IntelliJ IDEA IDE
