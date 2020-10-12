@@ -30,15 +30,6 @@ interface Api {
             @Header("Content-Type") contentType: String
     ): Call<Category>
 
-    @GET("/sale/categories/{categoryId}")
-    fun getCategoryByIDError(
-            @Path("categoryId") categoryId: String,
-            @Header("Authorization") accessToken: String,
-            @Header("Accept-Language") acceptLanguage: String,
-            @Header("Accept") accept: String,
-            @Header("Content-Type") contentType: String
-    ): Call<MainErrors>
-
     @GET("/sale/categories/{categoryId}/parameters")
     fun getParametersSupportedByCategory(
             @Path("categoryId") categoryId: String,
@@ -47,15 +38,6 @@ interface Api {
             @Header("Accept") accept: String,
             @Header("Content-Type") contentType: String
     ): Call<MainParameters>
-
-    @GET("/sale/categories/{categoryId}/parameters")
-    fun getParametersSupportedByCategoryError(
-            @Path("categoryId") categoryId: String,
-            @Header("Authorization") accessToken: String,
-            @Header("Accept-Language") acceptLanguage: String,
-            @Header("Accept") accept: String,
-            @Header("Content-Type") contentType: String
-    ): Call<MainErrors>
 
     @GET("/sale/matching-categories")
     fun getCategoriesSuggestions(
